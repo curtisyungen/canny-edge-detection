@@ -6,6 +6,12 @@ import org.opencv.imgproc.Imgproc
 import org.opencv.android.Utils as OpenCVUtils
 
 class ImageUtils {
+    // Applies Canny edge detection to crop padding from left and right sides of images
+    // 1. Convert images to black and white and apply slight blur
+    // 2. Apply Canny edge detection
+    // 3. Sum columns of pixels to determine strong and weak edges
+    // 4. Scan inward from left and right sides to determine boundaries
+    // 5. Crop the image between left/right boundaries
     fun cropEdges(bitmap: Bitmap, edgeThreshold1: Double = 50.0, edgeThreshold2: Double = 150.0): Bitmap {
         val mat = Mat()
         OpenCVUtils.bitmapToMat(bitmap, mat)
