@@ -25,7 +25,7 @@ class ImageUtils {
         val edgeSums = IntArray(edges.cols())
         for (x in 0 until edges.cols()) {
             var sum = 0
-            val topScan = (edges.rows() * 0.3).toInt()
+            val topScan = (edges.rows() * TOP_SCAN_RATIO).toInt()
             for (y in 0 until topScan) {
                 sum += edges.get(y, x)[0].toInt()
             }
@@ -50,6 +50,9 @@ class ImageUtils {
     }
 
     companion object {
-        private const val EDGE_THRESHOLD = 1000 // threshold column sum needs to exceed for it to be considered an edge
+        // threshold column sum needs to exceed for it to be considered an edge
+        private const val EDGE_THRESHOLD = 1000
+        // fraction of image height used for scanning for edges in case border is partial height (e.g. image_3.png)
+        private const val TOP_SCAN_RATIO = 0.3
     }
 }
